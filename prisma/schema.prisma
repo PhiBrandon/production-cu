@@ -1,0 +1,31 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+model users {
+  id       Int     @id @unique(map: "id_UNIQUE") @default(autoincrement())
+  email    String  @unique(map: "email_UNIQUE") @db.VarChar(45)
+  password String  @db.VarChar(200)
+  name     String  @db.VarChar(45)
+  session  String? @db.VarChar(45)
+}
+
+model loanapplications {
+  id            String  @id @db.VarChar(100)
+  userid        String? @db.VarChar(100)
+  status        String? @default("Pending Approval") @db.VarChar(45)
+  type          String? @db.VarChar(45)
+  propertytype  String? @db.VarChar(45)
+  creditscore   String? @db.VarChar(45)
+  streetaddress String? @db.VarChar(200)
+  propertyuse   String? @db.VarChar(45)
+  city          String? @db.VarChar(45)
+  postalcode    String? @db.VarChar(100)
+  appliedat     Int?
+  amountdue     Int?    @default(0)
+}
