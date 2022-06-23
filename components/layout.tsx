@@ -9,16 +9,10 @@ type Props = {
 
 const Layout: React.FC<Props> = (props) => {
   const pagename = props.pagename
-  const { data: session } = useSession()
-  if (session) {
+  const { data: session, status: isLoading } = useSession()
+  if (session && isLoading != "authenticated") {
     return (
-      <DashLayout pagename={pagename}>
-        {props.children}
-      </DashLayout>
-    )
-  }
-  return (
-    <div className="h-[100vh]">
+      <div className="h-[100vh]">
       <div className=" w-full flex flex-col justify-center items-center min-h-full">
         <p>Not signed in</p>
         <a className="inline-flex items-center px-6 py-3 border border-transparent text-base font-medium rounded-md shadow-sm text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" href="/signin">
@@ -26,7 +20,20 @@ const Layout: React.FC<Props> = (props) => {
         </a>
       </div>
     </div>
-  )
+    )
+  } else if (isLoading == "loading"){
+    return (
+    <DashLayout pagename={pagename}>
+        Loading...
+      </DashLayout>)
+  } else {
+    return (
+    <DashLayout pagename={pagename}>
+        {props.children}
+      </DashLayout>)
+  }
+  
+  
 };
 
 export default Layout;
