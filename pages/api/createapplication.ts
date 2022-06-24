@@ -41,5 +41,5 @@ export default async function createapplication(
     console.log(loanApplication)
     console.log(userInformation)
 
-    res.status(200).json({ name: 'John Doe' })
+    res.status(200).json({ message: 'Success' })
   }

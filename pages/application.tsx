@@ -32,7 +32,7 @@ const Application: NextPage = () => {
             body: JSON.stringify(data),
         });
 
-        if (res.status == 201) {
+        if (res.status == 200) {
             const result = await res.json()
           //e.target.reset()
             console.log(result);

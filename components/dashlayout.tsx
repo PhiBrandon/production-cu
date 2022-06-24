@@ -30,6 +30,7 @@ function classNames(...classes:any[]) {
 type Props = {
     children: ReactNode;
     pagename: string;
+    name: string;
   };
 
   const DashLayout: React.FC<Props> = (props) => {
@@ -125,7 +126,7 @@ type Props = {
                           />
                         </div> */}
                         <div className="ml-3">
-                          <p className="text-base font-medium text-white">Brandon Phillips</p>
+                          <p className="text-base font-medium text-white">{props.name}</p>
                           <button className="text-xs font-medium text-indigo-200 group-hover:text-white" onClick={() => signOut({
                             redirect: true,
                             callbackUrl: '/signin'
@@ -182,7 +183,7 @@ type Props = {
                     />
                   </div> */}
                   <div className="ml-3">
-                    <p className="text-sm font-medium text-white">Brandon Phillips</p>
+                    <p className="text-sm font-medium text-white">{props.name}</p>
                     <button className="text-xs font-medium text-indigo-200 group-hover:text-white" onClick={() => signOut({
                             redirect: true,
                             callbackUrl: '/signin'
