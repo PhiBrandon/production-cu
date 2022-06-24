@@ -9,9 +9,23 @@ type Props = {
 
 const Layout: React.FC<Props> = (props) => {
   const pagename = props.pagename
-  const { data: session, status: isLoading } = useSession()
-  if (session && isLoading != "authenticated") {
+  const { data: session, status } = useSession()
+  if (session && status == "authenticated") {
     return (
+      <DashLayout pagename={pagename}>
+        {props.children}
+      </DashLayout>)   
+  } 
+  
+  if(status === "loading"){
+    return (
+    <DashLayout pagename={pagename}>
+        Loading...
+      </DashLayout>)
+  } 
+
+  return (
+    <>
       <div className="h-[100vh]">
       <div className=" w-full flex flex-col justify-center items-center min-h-full">
         <p>Not signed in</p>
@@ -20,18 +34,8 @@ const Layout: React.FC<Props> = (props) => {
         </a>
       </div>
     </div>
-    )
-  } else if (isLoading == "loading"){
-    return (
-    <DashLayout pagename={pagename}>
-        Loading...
-      </DashLayout>)
-  } else {
-    return (
-    <DashLayout pagename={pagename}>
-        {props.children}
-      </DashLayout>)
-  }
+    </>
+  )
   
   
 };

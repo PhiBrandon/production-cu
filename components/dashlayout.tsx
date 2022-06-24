@@ -16,8 +16,8 @@ import { useSession, signOut } from "next-auth/react";
 
 
 const navigation = [
-  { name: 'Dashboard', href: '/dashboard', icon: HomeIcon, current: true },
-  { name: 'Apply for Loan', href: '/application', icon: UsersIcon, current: false },
+  //{ name: 'Dashboard', href: '/dashboard', icon: HomeIcon, current: true },
+  { name: 'Apply for Loan', href: '/application', icon: UsersIcon, current: true },
   { name: 'View Loans', href: '/loans', icon: FolderIcon, current: false },
   
 ]
@@ -35,16 +35,10 @@ type Props = {
   const DashLayout: React.FC<Props> = (props) => {
   const [sidebarOpen, setSidebarOpen] = useState(false)
   if(props.pagename == "Current Loans"){
-    navigation[2].current = true
-    navigation[1].current = false
     navigation[0].current = false
-  }
-  if(props.pagename == "Application"){
-    navigation[2].current = false
     navigation[1].current = true
-    navigation[0].current = false
   }
-  
+
 
   return (
     <>
@@ -123,16 +117,19 @@ type Props = {
                   <div className="flex-shrink-0 flex border-t border-indigo-800 p-4">
                     <a href="#" className="flex-shrink-0 group block">
                       <div className="flex items-center">
-                        <div>
+                        {/* <div>
                           <img
                             className="inline-block h-10 w-10 rounded-full"
                             src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
                             alt=""
                           />
-                        </div>
+                        </div> */}
                         <div className="ml-3">
                           <p className="text-base font-medium text-white">Brandon Phillips</p>
-                          <button className="text-xs font-medium text-indigo-200 group-hover:text-white" onClick={() => signOut()}>Logout</button>
+                          <button className="text-xs font-medium text-indigo-200 group-hover:text-white" onClick={() => signOut({
+                            redirect: true,
+                            callbackUrl: '/signin'
+                          })}>Logout</button>
                         </div>
                       </div>
                     </a>
@@ -177,16 +174,19 @@ type Props = {
             <div className="flex-shrink-0 flex border-t border-indigo-800 p-4">
               <a href="#" className="flex-shrink-0 w-full group block">
                 <div className="flex items-center">
-                  <div>
+                  {/* <div>
                     <img
                       className="inline-block h-9 w-9 rounded-full"
                       src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
                       alt=""
                     />
-                  </div>
+                  </div> */}
                   <div className="ml-3">
                     <p className="text-sm font-medium text-white">Brandon Phillips</p>
-                    <button className="text-xs font-medium text-indigo-200 group-hover:text-white" onClick={() => signOut()}>Logout</button>
+                    <button className="text-xs font-medium text-indigo-200 group-hover:text-white" onClick={() => signOut({
+                            redirect: true,
+                            callbackUrl: '/signin'
+                          })}>Logout</button>
                   </div>
                 </div>
               </a>

@@ -13,10 +13,10 @@ const Signin: NextPage = () => {
             redirect: false,
             email: e.target.email.value,
             password: password,
-            callbackUrl: '/dashboard'
+            callbackUrl: '/application'
         })
         if(res?.ok){
-          router.push('/dashboard')
+          router.push('/application')
         } else {
           //console.log(res?.error)
           alert("Improper Credentials, Try again.")

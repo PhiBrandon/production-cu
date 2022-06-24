@@ -2,8 +2,10 @@ import { NextPage } from "next";
 import Layout from "../components/layout";
 import { LockClosedIcon } from '@heroicons/react/solid'
 import { hash } from "bcryptjs";
+import { useRouter } from "next/router";
 
 const SignUp: NextPage = () => {
+    const router = useRouter()
     const onFormSubmit = async (e: any) => {
         e.preventDefault()
         const email = e.target.email.value
@@ -29,6 +31,8 @@ const SignUp: NextPage = () => {
         const data = await res.json();
         if (res.status == 201) {
             console.log(data.message);
+            router.push('/signin')
+
         }
     }
     return (
